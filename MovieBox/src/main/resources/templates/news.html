@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/head}"><title>News</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar::navbar(activeLink=${'/news'})}">
+</div>
+<div class="movies_section layout_padding">
+    <div class="container">
+        <div class="movies_menu" th:replace="~{fragments/overview}"></div>
+        <div class="movies_section_2 layout_padding">
+            <h2 class="latest_text" th:text="#{latest_news_text}">Latest News</h2>
+            <div class="production_main">
+                <div class="image_movies_main"
+                     th:each="news : ${allNews}"
+                     th:object="${news}">
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img th:src="*{firstImageUrl}" class="image" alt="Image">
+                        </div>
+                        <h1 class="code_text" th:text="*{name}">Celebrity Name</h1>
+                        <p class="there_text" th:text="*{newsType}">There are many variations</p>
+                        <div class="star_icon">
+                            <div class="card-body">
+                                <a class="card-link" th:href="@{/news/{id}(id=*{id})}"
+                                   th:text="#{movie_box_details_btn}">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="see-more-button" class="see-more" th:text="#{movie_box_see_more_btn}">See More</button>
+</div>
+<script th:src="@{/js/seeMoreButtonHandler.js}"></script>
+<footer th:replace="~{fragments/footer}"></footer>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
+</body>
+</html>

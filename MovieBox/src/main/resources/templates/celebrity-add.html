@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Add Celebrity</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar::navbar(activeLink=${'/celebrities/add'})}">
+</div>
+<div class="common_page add_celebrity_page">
+    <div class="container">
+        <h2 class="text-center text-white">Add Celebrity</h2>
+        <form th:method="post"
+              th:action="@{/celebrities/add}"
+              th:object="${addCelebrityDTO}"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <!-- Celebrity name -->
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="name">Celebrity name</label>
+                    <input type="text"
+                           id="name"
+                           class="form-control"
+                           th:field="*{name}"
+                           th:errorclass="is-invalid"
+                           placeholder="Celebrity name"/>
+                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                    <!--                    <small th:if="${#fields.errors('name')}" th:errors="*{name}" class="invalid-feedback errors alert alert-danger"></small>-->
+                </div>
+                <!-- EO: Celebrity name -->
+            </div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <!-- Biography -->
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="biography">Biography</label>
+                <textarea id="biography"
+                          th:field="*{biography}"
+                          th:errorclass="is-invalid"
+                          type="textarea"
+                          class="form-control"
+                          rows="3"
+                          placeholder="Biography">
+                </textarea>
+                <small th:each="error : ${#fields.errors('biography')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <!-- EO: Biography -->
+            <!-- Image URL -->
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="imageUrl">Celebrity Image URL</label>
+                <input id="imageUrl"
+                       th:field="*{imageUrl}"
+                       th:errorclass="is-invalid"
+                       type="url"
+                       class="form-control"
+                       placeholder="Put celebrity image URL here">
+                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <!-- EO: Image URL -->
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Add Celebrity"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- copyright section start -->
+<div class="copyright_section"
+     th:replace="~{fragments/copyrights}">
+</div>
+<!-- copyright section end -->
+</body>
+</html>

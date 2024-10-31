@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Login page</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar::navbar(activeLink=${'index'})}">
+</div>
+<main class="common_page object_not_found_page">
+
+  <div>
+    <h5 class="text-center mt-5 object_not_found_title">Oops! You ran out of movies and tv shows.</h5>
+  </div>
+
+  <div>
+    <h5 class="text-center mt-5 object_not_found_text">
+      Object with id <th:block th:text="${objectId}">1</th:block> was not found!
+    </h5>
+  </div>
+
+  <div class="text-center mt-5 object_not_found_text">
+    We are sorry! Please navigate to <a th:href="@{/}">HOME PAGE</a>...
+  </div>
+</main>
+<div class="copyright_section"
+     th:replace="~{fragments/copyrights}">
+</div>
+</body>
+</html>

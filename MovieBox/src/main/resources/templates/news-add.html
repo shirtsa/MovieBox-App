@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Add News</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar::navbar(activeLink=${'/news/add'})}">
+</div>
+<div class="common_page add_news_page production_add_page">
+    <div class="container">
+        <h2 class="text-center text-white">Add News</h2>
+        <form th:method="post"
+              th:action="@{/news/add}"
+              th:object="${addNewsDTO}"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="name">News Name</label>
+                    <input id="name"
+                           th:field="*{name}"
+                           th:errorclass="is-invalid"
+                           type="text"
+                           class="form-control"
+                           placeholder="News name"/>
+                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="newsType">News type</label>
+                    <select id="newsType"
+                            name="newsType"
+                            th:field="*{newsType}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select news type -</option>
+                        <option th:each="type : ${newsType}"
+                                th:text="${type}"
+                                th:value="${type}">
+                        </option>
+                    </select>
+                    <small th:each="error : ${#fields.errors('newsType')}" th:text="${error}" class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="firstImageUrl">Image URL</label>
+                <input id="firstImageUrl"
+                       th:field="*{firstImageUrl}"
+                       th:errorclass="is-invalid"
+                       type="url" class="form-control"
+                       placeholder="Put news image URL here">
+                <small th:each="error : ${#fields.errors('firstImageUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="secondImageUrl">Image URL</label>
+                <input id="secondImageUrl"
+                       th:field="*{secondImageUrl}"
+                       th:errorclass="is-invalid"
+                       type="url" class="form-control"
+                       placeholder="Put news image URL here">
+                <small th:each="error : ${#fields.errors('secondImageUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="trailerUrl">Video URL</label>
+                <input id="trailerUrl"
+                       th:field="*{trailerUrl}"
+                       th:errorclass="is-invalid"
+                       type="url" class="form-control"
+                       placeholder="Put news trailer URL here">
+                <small th:each="error : ${#fields.errors('trailerUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="description">Description</label>
+                <textarea
+                        th:field="*{description}"
+                        th:errorclass="is-invalid"
+                        type="textarea"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Description">
+                    </textarea>
+                <small th:each="error : ${#fields.errors('description')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Submit News"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script th:src="@{/js/dynamicBackgroundImages.js}"></script>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
+</body>
+</html>

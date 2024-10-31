@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Overview page</title></head>
+<body>
+<div class="header_section" th:replace="~{fragments/navbar::navbar(activeLink=${'/overview'})}"></div>
+<!-- movies section start -->
+<div class="movies_section layout_padding">
+    <div class="container">
+        <div class="movies_menu"
+             th:replace="~{fragments/overview}">
+        </div>
+        <div class="movies_section_2 layout_padding">
+            <h2 class="latest_text" th:text="#{movies_latest_text}">Latest Movies</h2>
+            <div class="production_main">
+                <div class="image_movies_main"
+                     th:each="movie : ${allMovieProductions}"
+                     th:object="${movie}">
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img th:src="*{imageUrl}" class="image" alt="Image">
+                            <div class="middle">
+                                <div class="playnow_bt">
+                                    <a th:href="*{videoUrl}" th:text="#{movie_box_play_btn}">Play Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="code_text" th:text="*{name}">Production Name</h1>
+                        <p class="there_text" th:text="*{genre}">There are many variations</p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                            </ul>
+                            <div class="card-body">
+                                <a class="card-link" th:href="@{/productions/{id}(id=*{id})}"
+                                   th:text="#{movie_box_details_btn}">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="movies_section_2 layout_padding">
+            <h2 class="latest_text" th:text="#{tv_latest_text}">Latest TV Shows</h2>
+            <div class="production_main">
+                <div class="image_movies_main"
+                     th:each="tv : ${allTvProductions}"
+                     th:object="${tv}">
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img th:src="*{imageUrl}" class="image" alt="Image">
+                            <div class="middle">
+                                <div class="playnow_bt">
+                                    <a th:href="*{videoUrl}" th:text="#{movie_box_play_btn}">Play Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="code_text" th:text="*{name}">Production Name</h1>
+                        <p class="there_text" th:text="*{genre}">There are many variations</p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="/images/star-icon.png"></a></li>
+                            </ul>
+                            <div class="card-body">
+                                <a class="card-link" th:href="@{/productions/{id}(id=*{id})}"
+                                   th:text="#{movie_box_details_btn}">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="movies_section_2 layout_padding">
+            <h2 class="latest_text" th:text="#{latest_news_text}">Latest News</h2>
+            <div class="production_main">
+                <div class="image_movies_main"
+                     th:each="news : ${allNews}"
+                     th:object="${news}">
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img th:src="*{firstImageUrl}" class="image" alt="Image">
+                        </div>
+                        <h1 class="code_text" th:text="*{name}">Celebrity Name</h1>
+                        <p class="there_text" th:text="*{newsType}">There are many variations</p>
+                        <div class="star_icon">
+                            <div class="card-body">
+                                <a class="card-link" th:href="@{/news/{id}(id=*{id})}"
+                                   th:text="#{movie_box_details_btn}">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="movies_section_2 layout_padding">
+            <h2 class="latest_text" th:text="#{celebrity_text}">Celebrities</h2>
+            <div class="production_main">
+                <div class="image_movies_main"
+                     th:each="celebrity : ${allCelebrities}"
+                     th:object="${celebrity}">
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img th:src="*{imageUrl}" class="image" alt="Image">
+                        </div>
+                        <h1 class="code_text" th:text="*{name}">Celebrity Name</h1>
+                        <!--                        <p class="there_text" th:text="">There are many variations</p>-->
+                        <div class="star_icon">
+                            <div class="card-body">
+                                <a class="card-link" th:href="@{/celebrities/{id}(id=*{id})}"
+                                   th:text="#{movie_box_details_btn}">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer}"></footer>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
+</body>
+</html>

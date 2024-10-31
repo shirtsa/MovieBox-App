@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Login page</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}">
+</div>
+<main class="common_page login_page">
+    <div class="registration-container">
+        <form class="mx-auto w-25 bg-blur"
+              th:action="@{/users/login}"
+              th:method="post">
+
+            <p class="alert alert-danger" th:if="${wrongCredentials}" th:text="#{wrongLogin}"></p>
+            <div class="form-group">
+                <div class="label-holder text-white d-flex justify-content-center">
+                    <label for="email" class="h3 mb-2" th:text="#{login_email_text}">Email</label>
+                </div>
+                <input id="email"
+                       name="email"
+                       type="text"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder text-white d-flex justify-content-center">
+                    <label for="password" class="h3 mb-2" th:text="#{login_password_text}">Password</label>
+                </div>
+                <input id="password"
+                       name="password"
+                       type="password"
+                       class="form-control"/>
+            </div>
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn btn-warning  mb-3" th:text="#{login_btn}">Login</button>
+            </div>
+        </form>
+    </div>
+</main>
+<div class="copyright_section"
+     th:replace="~{fragments/copyrights}">
+</div>
+</body>
+</html>

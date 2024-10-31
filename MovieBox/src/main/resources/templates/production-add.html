@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Add Productions</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar::navbar(activeLink=${'/productions/add'})}">
+</div>
+<div class="common_page production_page production_add_page">
+    <div class="container">
+        <h2 class="text-center text-white">Add Production</h2>
+        <form th:method="post"
+              th:action="@{/productions/add}"
+              th:object="${addProductionDTO}"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="name">Production Name</label>
+                    <input id="name"
+                           th:field="*{name}"
+                           th:errorclass="is-invalid"
+                           type="text"
+                           class="form-control"
+                           placeholder="Production name"/>
+                    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                    <!--                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}" class="invalid-feedback errors alert alert-danger"></small>-->
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="length">Length</label>
+                    <input id="length"
+                           th:field="*{length}"
+                           th:errorclass="is-invalid"
+                           type="number"
+                           class="form-control"
+                           placeholder="Production length"/>
+                    <small th:each="error : ${#fields.errors('length')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="productionType">Production
+                        type</label>
+                    <select id="productionType"
+                            name="productionType"
+                            th:field="*{productionType}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select production type -</option>
+                        <option th:each="type : ${productionTypes}"
+                                th:text="${type}"
+                                th:value="${type}">
+                        </option>
+                    </select>
+                    <small th:each="error : ${#fields.errors('productionType')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="genre">Genre</label>
+                    <select id="genre"
+                            th:field="*{genre}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select genre -</option>
+                        <option th:each="type : ${genreTypes}"
+                                th:text="${type}"
+                                th:value="${type}">
+                        </option>
+                    </select>
+                    <small th:each="error : ${#fields.errors('genre')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" th:for="year">Year</label>
+                    <input id="year"
+                           th:field="*{year}"
+                           th:errorclass="is-invalid"
+                           type="number" min="1906" max="2024" step="1"
+                           class="form-control"
+                           placeholder="Released year"/>
+                    <small th:each="error : ${#fields.errors('year')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" th:for="rating">Rating</label>
+                    <input id="rating"
+                           th:field="*{rating}"
+                           th:errorclass="is-invalid"
+                           type="number"
+                           class="form-control"
+                           placeholder="Production rating"/>
+                    <!--                                        <p if="${#fields.hasErrors('rating')}"-->
+                    <!--                                           class="errors alert alert-danger"-->
+                    <!--                                           errors="*{rating}">-->
+                    <!--                                        </p>-->
+                    <small th:each="error : ${#fields.errors('rating')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" th:for="rentPrice">Rent Price (BGN)</label>
+                    <input id="rentPrice"
+                           th:field="*{rentPrice}"
+                           th:errorclass="is-invalid"
+                           type="number" min="0"
+                           class="form-control"
+                           placeholder="Rent price in BGN"/>
+                    <small th:each="error : ${#fields.errors('rentPrice')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="description">Description</label>
+                <textarea
+                        th:field="*{description}"
+                        th:errorclass="is-invalid"
+                        type="textarea"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Description">
+                    </textarea>
+                <small th:each="error : ${#fields.errors('description')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="imageUrl">Image URL</label>
+                <input id="imageUrl"
+                       th:field="*{imageUrl}"
+                       th:errorclass="is-invalid"
+                       type="url" class="form-control"
+                       placeholder="Put production image URL here">
+                <small th:each="error : ${#fields.errors('imageUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="videoUrl">Video URL</label>
+                <input id="videoUrl"
+                       th:field="*{videoUrl}"
+                       th:errorclass="is-invalid"
+                       type="url" class="form-control"
+                       placeholder="Put production video URL here">
+                <small th:each="error : ${#fields.errors('videoUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+            </div>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Submit Production"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script th:src="@{/js/dynamicBackgroundImages.js}"></script>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
+</body>
+</html>

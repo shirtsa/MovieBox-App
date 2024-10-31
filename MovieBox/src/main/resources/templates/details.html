@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/head}"><title>Production Details</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar}">
+</div>
+<div class="common_page production_details_page"
+     th:style="'background-image: url(' + ${productionDetails.imageUrl} + ');'">
+    <div th:object="${productionDetails}">
+        <h1 class="production-details-title" th:text="*{name}">Movie Title</h1>
+        <div class="production-details">
+            <span th:text="'Released: ' + *{year}">Release Date</span>
+            <span th:text="'(' + *{length} + ' min' + ')'">Movie Length</span>
+        </div>
+        <div class="production-details-button">
+            <div class="details-rent-btn btn-common">
+                <a id="rentPlayButton" data-rent-price="*{rentPrice}" th:href="*{'https://www.youtube.com/embed/' + videoUrl()}">
+                    <img id="rentIcon" src="/images/rent-btn.png" alt="Rent icon">
+                    <img id="playIcon" src="/images/play-btn.png" alt="Play icon" style="display: none;">
+                    <span id="rentPlayText" th:text="'Rent ' + *{rentPrice}">Rent</span>
+                </a>
+                <select id="currency">
+                    <option
+                            th:each="currency : *{allCurrencies}"
+                            th:value="${currency}"
+                            th:selected="${currency} == 'BGN'"
+                            th:text="${currency}">
+                    </option>
+                </select>
+            </div>
+            <input type="hidden" id="rentPriceInBGN" th:value="*{rentPrice}">
+            <div class="my-playlist-btn btn-common">
+                <a th:href="@{/my-list}">
+                    <img src="/images/plus-btn.png" alt="Play icon">
+                    <span>My Playlist</span>
+                </a>
+            </div>
+            <div class="details-update-btn btn-common">
+                <img src="/images/update-btn.png" alt="Update icon">
+                <form th:method="update" th:action="@{/productions/{id}(id=*{id})}">
+                    <input class="btn btn-link" type="submit" value="Update">
+                </form>
+            </div>
+            <div class="details-delete-btn btn-common">
+                <img src="/images/delete-btn.png" alt="Delete icon">
+                <form th:method="delete" th:action="@{/productions/{id}(id=*{id})}">
+                    <input class="btn btn-link" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+        <div class="production-details-genre" th:text="'Genre: ' + *{genre}">
+            Movie Genre
+        </div>
+        <div class="production-details-description" th:text="*{description}">
+            Movie description goes here.
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/rentPlayButtonHandler.js}"></script>
+<script th:src="@{/js/currency.js}"></script>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Register</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar::navbar(activeLink=${'register'})}">
+</div>
+<main class="common_page registration_page">
+    <div class="registration-container">
+        <form class="mx-auto w-25 bg-blur rounded"
+              th:method="post"
+              th:action="@{/users/register}"
+              th:object="${userRegistrationDTO}">
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label th:for="email" class="h4 mb-2" th:text="#{register_email_text}">Email</label>
+                </div>
+                <input type="email"
+                       id="email"
+                       class="form-control"
+                       th:field="*{email}"
+                       th:errorclass="is-invalid"/>
+                <small th:errors="*{email}" class="invalid-feedback errors alert alert-danger">Email error
+                    message</small>
+                <!--                <small th:each="error : ${#fields.errors('email')}" th:text="${error}" class="invalid-feedback errors alert alert-danger"></small>-->
+                <!--                <small th:errors="*{email}" class="invalid-feedback errors alert alert-danger">Email error message</small>-->
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label th:for="firstName" class="h4 mb-2 text-white" th:text="#{register_first_name}">First
+                        Name</label>
+                </div>
+                <input type="text"
+                       id="firstName"
+                       class="form-control"
+                       th:field="*{firstName}"
+                       th:errorclass="is-invalid"/>
+                <small th:each="error : ${#fields.errors('firstName')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+                <!--                <small th:errors="*{firstName}" class="text-danger">First Name error message</small>-->
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label th:for="lastName" class="h4 mb-2 text-white" th:text="#{register_last_name}">Last
+                        Name</label>
+                </div>
+                <input type="text"
+                       id="lastName"
+                       class="form-control"
+                       th:field="*{lastName}"
+                       th:errorclass="is-invalid"/>
+                <small th:each="error : ${#fields.errors('lastName')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+                <!--                <small th:errors="*{lastName}" class="text-danger">Last Name error message</small>-->
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label th:for="password" class="h4 mb-2" th:text="#{register_password_text}">Password</label>
+                </div>
+                <input type="password"
+                       id="password"
+                       class="form-control"
+                       th:field="*{password}"
+                       th:errorclass="is-invalid"/>
+                <small th:each="error : ${#fields.errors('password')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
+                <!--                <small th:errors="*{password}" class="text-danger">Password error message</small>-->
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label th:for="confirmPassword" class="h4 mb-2" th:text="#{register_confirm_password_text}">Confirm
+                        Password</label>
+                </div>
+                <input type="password"
+                       id="confirmPassword"
+                       class="form-control"
+                       th:field="*{confirmPassword}"
+                       th:errorclass="is-invalid"
+                       th:classappend="${#fields.hasErrors('password')} ? 'errors alert alert-danger bg-danger'"/>
+                <small th:errors="*{confirmPassword}" class="invalid-feedback errors alert alert-danger">Confirm
+                    Password error message</small>
+            </div>
+
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn btn-warning  mb-3" value="Register" th:text="#{register_btn}">
+                    Register
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+<div class="copyright_section"
+     th:replace="~{fragments/copyrights}">
+</div>
+</body>
+</html>

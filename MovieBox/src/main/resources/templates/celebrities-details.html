@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/head}"><title>Celebrities Details</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar}">
+</div>
+<div class="common_page production_add_page"
+     th:style="'background-image: url(' + ${celebrityDetails.imageUrl} + ');'">
+    <div th:object="${celebrityDetails}">
+        <h1 class="production-details-title" th:text="*{name}">Movie Title</h1>
+        <div class="production-details-button">
+            <div class="details-update-btn btn-common">
+                <img src="/images/update-btn.png" alt="Update icon">
+                <form th:method="update" th:action="@{/celebrities/{id}(id=*{id})}">
+                    <input class="btn btn-link" type="submit" value="Update">
+                </form>
+            </div>
+            <div class="details-delete-btn btn-common">
+                <img src="/images/delete-btn.png" alt="Delete icon">
+                <form th:method="delete" th:action="@{/celebrities/{id}(id=*{id})}">
+                    <input class="btn btn-link" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+        <div class="production-details-description" th:text="*{biography}">
+            Movie description goes here.
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/rentPlayButtonHandler.js}"></script>
+<script th:src="@{/js/currency.js}"></script>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
+</body>
+</html>

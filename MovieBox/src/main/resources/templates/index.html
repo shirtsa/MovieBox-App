@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}"><title>Index page</title></head>
+<body>
+<div class="header_section" th:replace="~{fragments/navbar::navbar(activeLink=${'/'})}"></div>
+<!-- banner section start -->
+<div class="banner_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="banner_title">
+                    <h5 class="text-center text-white mt-5">
+                        <th:block th:text="#{welcome}"></th:block>
+                        <th:block th:text="${welcomeMessage}"></th:block>
+                    </h5>
+                </div>
+                <div class="banner_title">
+                    <span th:text="#{banner_title_first}">Enjoy</span>
+                    <br>
+                    <span th:text="#{banner_title_second}">The movies And TV shows</span>
+                </div>
+                <p class="banner_text"
+                   th:text="#{banner_text_third}"
+                   sec:authorize="!isAuthenticated()">Create account and have fun!</p>
+                <div class="see_bt"><a href="/users/register"
+                                       th:text="#{banner_register_btn}"
+                                       sec:authorize="!isAuthenticated()">Register</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="play_icon"><a th:href="*{'https://www.youtube.com/embed/dN3ltKrp2t8'}"><img src="/images/play-icon.png" alt="Play icon"></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner section end -->
+<!-- arrival section start -->
+<div class="arrival_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-lg-4">
+                <div class="image_1">
+                    <h2 class="jesusroch_text">J E S U S R O C H</h2>
+                    <p class="movie_text">Hollywood Movie</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="image_2">
+                    <h2 class="jesusroch_text">J E S U S R O C H</h2>
+                    <p class="movie_text">Hollywood Movie</p>
+                </div>
+            </div>
+            <div class="col-sm-8 col-lg-4">
+                <h1 class="arrival_text">A r r i v a l</h1>
+                <div class="movie_main">
+                    <div class="mins_text_1">150 mins</div>
+                    <div class="mins_text">Actions Movie</div>
+                    <div class="mins_text"><img src="images/icon-1.png"><span class="icon_1">Watchlist</span></div>
+                </div>
+                <p class="long_text">It is a long-established fact that a reader will be distracted by the readable
+                    content of a page when looking at its layout. The point of using Lorem</p>
+                <div class="rating_main">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="icon_2"><img src="images/icon-2.png"><span
+                                    class="padding_10">4.6 Reviewed</span></div>
+                        </div>
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="icon_2"><img src="images/icon-2.png"><span class="padding_10">Your Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="play_bt"><a href="#">Play Now</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- arrival section end -->
+<!-- movies section start -->
+<div class="movies_section layout_padding">
+    <div class="container">
+        <div class="movies_menu"
+             th:replace="~{fragments/overview}">
+        </div>
+        <div class="movies_section_2 layout_padding">
+            <h2 class="latest_text">Latest Movies</h2>
+            <div class="seemore_bt"><a href="/productions/movies">See More</a></div>
+            <div class="movies_main">
+                <div class="image_movies_main">
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-3.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">CADE Prlor</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-4.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Bradon</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-5.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Anton Levin</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-6.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Sacha Styles</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-7.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Katledrazdu</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="movies_section_2 layout_padding">
+            <h2 class="latest_text">TV Shows</h2>
+            <div class="seemore_bt"><a href="/productions/tv">See More</a></div>
+            <div class="movies_main">
+                <div class="image_movies_main">
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-8.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">CADE Prlor</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-9.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Bradon</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-10.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Anton Levin</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-11.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Sacha Styles</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image_movies">
+                        <div class="image_3">
+                            <img src="images/img-12.png" class="image" style="width:100%">
+                            <div class="middle">
+                                <div class="playnow_bt">Play Now</div>
+                            </div>
+                        </div>
+                        <h1 class="code_text">Katledrazdu</h1>
+                        <p class="there_text">There are many variations </p>
+                        <div class="star_icon">
+                            <ul>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="images/star-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="movies_section_2 layout_padding">
+        </div>
+    </div>
+</div>
+<!-- movies section end -->
+<!-- coming  section start -->
+<div class="coming_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="image_17">
+                    <div class="image_17">
+                        <img src="/images/img-17.png" alt="News image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1 class="number_text">01</h1>
+                <h1 class="Coming_soon_title" >Coming soon</h1>
+                <p class="long_text_1">Text</p>
+<!--                th:text="${#strings.abbreviate(latestNews.description, 100)}"-->
+                <div class="play_bt"><a href="#">See Trailer</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- coming  section end -->
+<footer th:replace="~{fragments/footer}"></footer>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
+</body>
+</html>

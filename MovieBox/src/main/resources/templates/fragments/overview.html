@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<body>
+<div class="movies_menu" th:fragment="overview">
+    <ul>
+        <li class="active"><a th:text="#{nav_bar_overview}" href="/overview">Overview</a></li>
+        <li><a th:text="#{nav_bar_tv}" href="/productions/tv">TV</a></li>
+        <li><a th:text="#{nav_bar_movies}" href="/productions/movies">Movies</a></li>
+        <li><a th:text="#{nav_bar_celebs}" href="/celebrities/all">Celebs</a></li>
+        <li><a th:text="#{nav_bar_news}" href="/news/all">News</a></li>
+    </ul>
+</div>
+</body>
+</html>
