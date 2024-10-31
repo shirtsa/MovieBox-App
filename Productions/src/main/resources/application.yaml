@@ -1,0 +1,40 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: 'TRUE'
+    hibernate:
+      ddl-auto: update
+    open-in-view: 'false'
+  sql:
+    init:
+      mode: never
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 12345
+    url: jdbc:mysql://localhost:3306/productions?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 8082
+
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+
+#productions.retention.period: P300D
+
+jwt:
+  secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
+
