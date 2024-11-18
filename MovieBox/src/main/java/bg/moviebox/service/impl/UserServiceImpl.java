@@ -6,7 +6,6 @@ import bg.moviebox.model.entities.User;
 import bg.moviebox.model.entities.UserRoleEntity;
 import bg.moviebox.model.enums.UserRoleEnum;
 import bg.moviebox.model.user.MovieBoxUserDetails;
-import bg.moviebox.repository.ProductionRepository;
 import bg.moviebox.repository.UserRepository;
 import bg.moviebox.repository.UserRoleRepository;
 import bg.moviebox.service.UserService;
@@ -24,14 +23,15 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final ProductionRepository productionRepository;
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
-    public UserServiceImpl(UserRepository userRepository, ProductionRepository productionRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository,
+                           UserRoleRepository userRoleRepository,
+                           PasswordEncoder passwordEncoder,
+                           ModelMapper modelMapper) {
         this.userRepository = userRepository;
-        this.productionRepository = productionRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserRegistrationDTO userRegistrationDTO) {
-
         boolean isFirstUser = userRepository.count() == 0;
         User user = map(userRegistrationDTO);
 
@@ -71,17 +70,6 @@ public class UserServiceImpl implements UserService {
             return Optional.of(movieBoxUserDetails);
         }
         return Optional.empty();
-    }
-
-    @Override
-    public void removeFromPlaylist(Long productionId, MovieBoxUserDetails movieBoxUserDetails) {
-        User user = userRepository.findById(movieBoxUserDetails.getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Production production = productionRepository.findById(productionId)
-                .orElseThrow(() -> new RuntimeException("Production not found"));
-
-        user.getPlaylist().remove(production);
-        userRepository.save(user);
     }
 
     @Override
