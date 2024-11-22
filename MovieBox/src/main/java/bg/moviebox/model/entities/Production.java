@@ -10,6 +10,9 @@ import jakarta.validation.constraints.*;
 @Table(name = "productions")
 public class Production extends BaseEntity {
 
+    @Column(name = "external_id",unique = true)
+    private Long externalId;
+
     @Column(nullable = false, unique = true)
     @NotEmpty
     @Size(min = 2, max = 200)
@@ -65,6 +68,15 @@ public class Production extends BaseEntity {
     public Production() {
 //        this.celebritiesInTheMovie = new HashSet<>();
 //        this.celebritiesInTheTvShow = new HashSet<>();
+    }
+
+    public Long getExternalId() {
+        return externalId;
+    }
+
+    public Production setExternalId(Long externalId) {
+        this.externalId = externalId;
+        return this;
     }
 
     public String getName() {
@@ -160,7 +172,8 @@ public class Production extends BaseEntity {
     @Override
     public String toString() {
         return "Production{" +
-                "name='" + name + '\'' +
+                "externalId=" + externalId +
+                ", name='" + name + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", videoUrl='" + videoUrl + '\'' +
                 ", genre=" + genre +

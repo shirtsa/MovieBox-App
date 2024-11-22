@@ -49,7 +49,8 @@ public class User extends BaseEntity {
     @JoinTable(
             name = "user_playlist",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "production_id"))
+//            inverseJoinColumns = @JoinColumn(name = "production_id"))
+            inverseJoinColumns = @JoinColumn(name = "external_id", referencedColumnName = "external_id"))
     private Set<Production> playlist;
 
     public User() {

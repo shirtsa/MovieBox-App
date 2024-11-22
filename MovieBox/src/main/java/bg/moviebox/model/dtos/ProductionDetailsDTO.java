@@ -18,5 +18,4 @@ public record ProductionDetailsDTO(
         ProductionType productionType,
         Genre genre,
         List<String> allCurrencies) {
-
 }
