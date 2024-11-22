@@ -1,6 +1,7 @@
 package bg.moviebox.web;
 
 import bg.moviebox.model.dtos.AddCelebrityDTO;
+import bg.moviebox.model.dtos.CelebrityDetailsDTO;
 import bg.moviebox.service.CelebrityService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -28,9 +29,9 @@ public class CelebrityController {
     }
 
     @PostMapping("/add")
-    public String addCelebrity(@Valid AddCelebrityDTO addCelebrityDTO,
-                               BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
+    public String addOrUpdateCelebrity(@Valid AddCelebrityDTO addCelebrityDTO,
+                                       BindingResult bindingResult,
+                                       RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addCelebrityDTO", addCelebrityDTO);
@@ -38,7 +39,10 @@ public class CelebrityController {
             return "redirect:/celebrities/add";
         }
 
-        celebrityService.createCelebrity(addCelebrityDTO);
+        celebrityService.createOrUpdateCelebrity(addCelebrityDTO);
+        if (addCelebrityDTO.id() != null) {
+            return "redirect:/celebrities/" + addCelebrityDTO.id();
+        }
         return "redirect:/celebrities/all";
     }
 
@@ -58,5 +62,19 @@ public class CelebrityController {
     public String deleteCelebrity(@PathVariable("id") Long id) {
         celebrityService.deleteCelebrity(id);
         return "redirect:/celebrities/all";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editCelebrity(@PathVariable("id") Long id, Model model) {
+        CelebrityDetailsDTO celebrityDetailsDTO = celebrityService.getCelebrityDetails(id);
+        AddCelebrityDTO addCelebrityDTO = new AddCelebrityDTO(
+                celebrityDetailsDTO.id(),
+                celebrityDetailsDTO.name(),
+                celebrityDetailsDTO.imageUrl(),
+                celebrityDetailsDTO.biography()
+        );
+
+        model.addAttribute("addCelebrityDTO", addCelebrityDTO);
+        return "/celebrity-add";
     }
 }
