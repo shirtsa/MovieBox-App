@@ -21,9 +21,20 @@ public class CelebrityServiceImpl implements CelebrityService {
     }
 
     @Override
-    public void createCelebrity(AddCelebrityDTO addCelebrityDTO) {
-        Celebrity celebrity = map(addCelebrityDTO);
-        celebrityRepository.save(celebrity);
+    public void createOrUpdateCelebrity(AddCelebrityDTO addCelebrityDTO) {
+        if (addCelebrityDTO.id() != null) {
+            Celebrity existingCelebrity = celebrityRepository.findById(addCelebrityDTO.id())
+                    .orElseThrow(() -> new ObjectNotFoundException("Celebrity not found!", addCelebrityDTO.id()));
+
+            existingCelebrity.setName(addCelebrityDTO.name());
+            existingCelebrity.setImageUrl(addCelebrityDTO.imageUrl());
+            existingCelebrity.setBiography(addCelebrityDTO.biography());
+
+            celebrityRepository.save(existingCelebrity);
+        } else {
+            Celebrity celebrity = map(addCelebrityDTO);
+            celebrityRepository.save(celebrity);
+        }
     }
 
     @Override

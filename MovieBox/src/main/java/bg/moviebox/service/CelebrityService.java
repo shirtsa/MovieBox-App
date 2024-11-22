@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CelebrityService {
 
-    void createCelebrity(AddCelebrityDTO addCelebrityDTO);
+    void createOrUpdateCelebrity(AddCelebrityDTO addCelebrityDTO);
 
     void deleteCelebrity(Long celebrityId);
 
