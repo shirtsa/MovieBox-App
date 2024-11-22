@@ -1,6 +1,7 @@
 package bg.moviebox.web;
 
 import bg.moviebox.model.dtos.AddNewsDTO;
+import bg.moviebox.model.dtos.NewsDetailsDTO;
 import bg.moviebox.model.enums.Genre;
 import bg.moviebox.model.enums.NewsType;
 import bg.moviebox.service.NewsService;
@@ -38,18 +39,20 @@ public class NewsController {
     }
 
     @PostMapping("/add")
-    public String addNews(@Valid AddNewsDTO addNewsDTO,
-                          BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes) {
-
+    public String addOrUpdateNews(@Valid AddNewsDTO addNewsDTO,
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addNewsDTO", addNewsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addNewsDTO", bindingResult);
             return "redirect:/news/add";
         }
 
-        newsService.createNews(addNewsDTO);
-        return "redirect:/";
+        newsService.createOrUpdateNews(addNewsDTO);
+        if (addNewsDTO.id() != null) {
+            return "redirect:/news/" + addNewsDTO.id(); // Redirect to the updated news details
+        }
+        return "redirect:/news";
     }
 
     @GetMapping("/{id}")
@@ -70,6 +73,23 @@ public class NewsController {
         return "news";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editNews(@PathVariable("id") Long id, Model model) {
+        NewsDetailsDTO newsDetailsDTO = newsService.getNewsDetails(id);
+        AddNewsDTO addNewsDTO = new AddNewsDTO(
+                newsDetailsDTO.id(),
+                newsDetailsDTO.name(),
+                newsDetailsDTO.firstImageUrl(),
+                newsDetailsDTO.secondImageUrl(),
+                newsDetailsDTO.trailerUrl(),
+                newsDetailsDTO.description(),
+                newsDetailsDTO.newsType().name()
+        );
+
+        model.addAttribute("addNewsDTO", addNewsDTO);
+        return "/news-add";
+    }
+
 //    @GetMapping("/coming-soon")
 //    public String getFirstNews(Model model) {
 //            News latestNews = newsService.getFirstNews();
@@ -77,4 +97,5 @@ public class NewsController {
 //
 //        return "/index";
 //    }
+
 }
