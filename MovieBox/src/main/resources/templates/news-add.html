@@ -12,6 +12,9 @@
               th:action="@{/news/add}"
               th:object="${addNewsDTO}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+
+            <input type="hidden" th:field="*{id}"/>
+
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" th:for="name">News Name</label>
@@ -37,7 +40,8 @@
                                 th:value="${type}">
                         </option>
                     </select>
-                    <small th:each="error : ${#fields.errors('newsType')}" th:text="${error}" class="invalid-feedback errors alert alert-danger"></small>
+                    <small th:each="error : ${#fields.errors('newsType')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
             </div>
             <div class="form-group">
@@ -65,7 +69,7 @@
                 <input id="trailerUrl"
                        th:field="*{trailerUrl}"
                        th:errorclass="is-invalid"
-                       type="url" class="form-control"
+                       class="form-control"
                        placeholder="Put news trailer URL here">
                 <small th:each="error : ${#fields.errors('trailerUrl')}" th:text="${error}"
                        class="invalid-feedback errors alert alert-danger"></small>
@@ -86,7 +90,10 @@
             <div class="row">
                 <div class="col col-md-4">
                     <div class="button-holder d-flex">
-                        <input type="submit" class="btn btn-info btn-lg" value="Submit News"/>
+                        <!--                        <input type="submit" class="btn btn-info btn-lg" value="Submit News"/>-->
+                        <input type="submit"
+                               th:value="${addNewsDTO.id != null} ? 'Update News' : 'Submit News'"
+                               class="btn btn-info btn-lg"/>
                     </div>
                 </div>
             </div>
