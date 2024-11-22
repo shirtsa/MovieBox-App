@@ -8,11 +8,11 @@
 <div class="common_page production_add_page"
      th:style="'background-image: url(' + ${celebrityDetails.imageUrl} + ');'">
     <div th:object="${celebrityDetails}">
-        <h1 class="production-details-title" th:text="*{name}">Movie Title</h1>
+        <h1 class="production-details-title" th:text="*{name}">Celebrities Title</h1>
         <div class="production-details-button">
             <div class="details-update-btn btn-common">
                 <img src="/images/update-btn.png" alt="Update icon">
-                <form th:method="update" th:action="@{/celebrities/{id}(id=*{id})}">
+                <form th:method="get" th:action="@{/celebrities/edit/{id}(id=*{id})}">
                     <input class="btn btn-link" type="submit" value="Update">
                 </form>
             </div>

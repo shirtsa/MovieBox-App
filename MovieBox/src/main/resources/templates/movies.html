@@ -19,7 +19,7 @@
                             <img th:src="*{imageUrl}" class="image" alt="Image">
                             <div class="middle">
                                 <div class="playnow_bt">
-                                    <a th:href="*{videoUrl}" th:text="#{movie_box_play_btn}">Play Now</a>
+                                    <a th:href="|https://www.youtube.com/embed/*{videoUrl}|" th:text="#{movie_box_play_btn}">Play Now</a>
                                 </div>
                             </div>
                         </div>

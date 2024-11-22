@@ -8,14 +8,15 @@
 <div class="common_page production_details_page"
      th:style="'background-image: url(' + ${productionDetails.imageUrl} + ');'">
     <div th:object="${productionDetails}">
-        <h1 class="production-details-title" th:text="*{name}">Movie Title</h1>
+        <h1 class="production-details-title" th:text="*{name}">Production Title</h1>
         <div class="production-details">
             <span th:text="'Released: ' + *{year}">Release Date</span>
-            <span th:text="'(' + *{length} + ' min' + ')'">Movie Length</span>
+            <span th:text="'(' + *{length} + ' min' + ')'">Production Length</span>
         </div>
         <div class="production-details-button">
             <div class="details-rent-btn btn-common">
-                <a id="rentPlayButton" data-rent-price="*{rentPrice}" th:href="*{'https://www.youtube.com/embed/' + videoUrl()}">
+                <a id="rentPlayButton" data-rent-price="*{rentPrice}"
+                   th:href="*{'https://www.youtube.com/embed/' + videoUrl()}">
                     <img id="rentIcon" src="/images/rent-btn.png" alt="Rent icon">
                     <img id="playIcon" src="/images/play-btn.png" alt="Play icon" style="display: none;">
                     <span id="rentPlayText" th:text="'Rent ' + *{rentPrice}">Rent</span>
@@ -31,14 +32,14 @@
             </div>
             <input type="hidden" id="rentPriceInBGN" th:value="*{rentPrice}">
             <div class="my-playlist-btn btn-common">
-                <a th:href="@{/my-list}">
                     <img src="/images/plus-btn.png" alt="Play icon">
-                    <span>My Playlist</span>
-                </a>
+                    <form th:method="post" th:action="@{/productions/{id}(id=*{id})}">
+                        <input class="btn btn-link" type="submit" value="My Playlist">
+                    </form>
             </div>
             <div class="details-update-btn btn-common">
                 <img src="/images/update-btn.png" alt="Update icon">
-                <form th:method="update" th:action="@{/productions/{id}(id=*{id})}">
+                <form th:method="get" th:action="@{/productions/edit/{id}(id=*{id})}">
                     <input class="btn btn-link" type="submit" value="Update">
                 </form>
             </div>

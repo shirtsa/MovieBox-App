@@ -12,6 +12,9 @@
               th:action="@{/productions/add}"
               th:object="${addProductionDTO}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+
+            <input type="hidden" th:field="*{id}"/>
+
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" th:for="name">Production Name</label>
@@ -140,7 +143,7 @@
                 <input id="videoUrl"
                        th:field="*{videoUrl}"
                        th:errorclass="is-invalid"
-                       type="url" class="form-control"
+                       class="form-control"
                        placeholder="Put production video URL here">
                 <small th:each="error : ${#fields.errors('videoUrl')}" th:text="${error}"
                        class="invalid-feedback errors alert alert-danger"></small>
@@ -148,7 +151,9 @@
             <div class="row">
                 <div class="col col-md-4">
                     <div class="button-holder d-flex">
-                        <input type="submit" class="btn btn-info btn-lg" value="Submit Production"/>
+                        <input type="submit"
+                               th:value="${addProductionDTO.id != null} ? 'Update Production' : 'Submit Production'"
+                               class="btn btn-info btn-lg"/>
                     </div>
                 </div>
             </div>

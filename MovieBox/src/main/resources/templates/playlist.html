@@ -19,16 +19,17 @@
                             <img th:src="*{imageUrl}" class="image" alt="Image">
                             <div class="middle">
                                 <div class="playnow_bt">
-                                    <a th:href="*{videoUrl}">Play Now</a>
+                                    <a th:href="|https://www.youtube.com/embed/*{videoUrl}|">Play Now</a>
                                 </div>
                             </div>
                         </div>
                         <h1 class="code_text" th:text="*{name}">Production Name</h1>
                         <p class="there_text" th:text="*{genre}">There are many variations</p>
                         <div class="star_icon">
-                            <div class="details-delete-btn btn-common">
+                            <div class="my-playlist-btn btn-common">
                                 <img src="/images/delete-btn.png" alt="Delete icon">
-                                <form th:method="post" th:action="@{/productions/{id}(id=*{id})}">
+                                <form th:method="post" th:action="@{/playlist/{id}(id=*{externalId})}">
+                                    <input type="hidden" name="_method" value="delete">
                                     <input class="btn btn-link" type="submit" value="Remove">
                                 </form>
                             </div>
@@ -36,22 +37,6 @@
                     </div>
                 </div>
             </div>
-
-
-<!--            <h2 class="playlist_text">My Playlist</h2>-->
-<!--            <div class="playlist_items">-->
-<!--                <div class="production_item" th:each="production : ${myPlaylist}">-->
-<!--                    <div class="image_movies">-->
-<!--                        <img th:src="${production.imageUrl}" alt="Image">-->
-<!--                        <h3 th:text="${production.name}">Production Name</h3>-->
-<!--                        <div class="remove_button">-->
-<!--                            <form th:action="@{/my-list/{id}/remove(id=${production.id})}" method="post">-->
-<!--                                <button type="submit">Remove from Playlist</button>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
         <button id="see-more-button" class="see-more">See More</button>
     </div>
