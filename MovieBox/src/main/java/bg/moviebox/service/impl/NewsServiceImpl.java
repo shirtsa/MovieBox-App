@@ -35,8 +35,25 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void createNews(AddNewsDTO addNewsDTO) {
-        newsRepository.save(map(addNewsDTO));
+    public void createOrUpdateNews(AddNewsDTO addNewsDTO) {
+        if (addNewsDTO.id() != null) {
+            // Fetch existing news from the repository by id
+            News existingNews = newsRepository.findById(addNewsDTO.id())
+                    .orElseThrow(() -> new ObjectNotFoundException("News not found!", addNewsDTO.id()));
+
+            // Update the existing news with the values from the DTO
+            existingNews.setName(addNewsDTO.name());
+            existingNews.setFirstImageUrl(addNewsDTO.firstImageUrl());
+            existingNews.setSecondImageUrl(addNewsDTO.secondImageUrl());
+            existingNews.setTrailerUrl(addNewsDTO.trailerUrl());
+            existingNews.setDescription(addNewsDTO.description());
+            existingNews.setNewsType(NewsType.valueOf(addNewsDTO.newsType()));
+
+            // Save the updated news entity
+            newsRepository.save(existingNews);
+        } else {
+            newsRepository.save(map(addNewsDTO)); // Create new news
+        }
     }
 
     @Override

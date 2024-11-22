@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface NewsService {
 
-    void createNews(AddNewsDTO addNewsDTO);
+    void createOrUpdateNews(AddNewsDTO addNewsDTO);
 
     void deleteNews(Long newsId);
 
