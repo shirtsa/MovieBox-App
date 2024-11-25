@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductionService {
 
-    void createProduction(AddProductionDTO addProductionDTO); //long
+    void createOrUpdateProduction(AddProductionDTO addProductionDTO); //long
 
     void deleteProduction(Long productionId);
 
@@ -22,5 +22,7 @@ public interface ProductionService {
     List<ProductionDetailsDTO> getAllTvProductions();
 
     void addToPlaylist(Long productionId, MovieBoxUserDetails movieBoxUserDetails);
+
+    void removeFromPlaylist(Long externalId, MovieBoxUserDetails movieBoxUserDetails);
 
 }
