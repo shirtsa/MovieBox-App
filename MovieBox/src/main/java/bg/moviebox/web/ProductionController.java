@@ -1,6 +1,7 @@
 package bg.moviebox.web;
 
 import bg.moviebox.model.dtos.AddProductionDTO;
+import bg.moviebox.model.dtos.ProductionDetailsDTO;
 import bg.moviebox.model.enums.Genre;
 import bg.moviebox.model.enums.ProductionType;
 import bg.moviebox.model.user.MovieBoxUserDetails;
@@ -47,9 +48,9 @@ public class ProductionController {
 
     // all errors from input info comes in the bindingResult
     @PostMapping("/add")
-    public String createProduction(@Valid AddProductionDTO addProductionDTO,
-                                   BindingResult bindingResult,
-                                   RedirectAttributes redirectAttributes) {
+    public String addOrUpdateProduction(@Valid AddProductionDTO addProductionDTO,
+                                        BindingResult bindingResult,
+                                        RedirectAttributes redirectAttributes) {
 
         // addFlashAttribute exist for short period of time to remembers the info
         // from the current session so can be used in the next session
@@ -59,11 +60,31 @@ public class ProductionController {
             return "redirect:/productions/add";
         }
 
-//        long newOfferId = productionService.createProduction(addProductionDTO);
-        productionService.createProduction(addProductionDTO);
-
-//        return "redirect:/productions/" + newOfferId;
+        productionService.createOrUpdateProduction(addProductionDTO);
+        if (addProductionDTO.id() != null) {
+            return "redirect:/productions/" + addProductionDTO.id();
+        }
         return "redirect:/productions/all";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editProduction(@PathVariable("id") Long id, Model model) {
+        ProductionDetailsDTO productionDetailsDTO = productionService.getProductionDetails(id);
+        AddProductionDTO addProductionDTO = new AddProductionDTO(
+                productionDetailsDTO.id(),
+                productionDetailsDTO.name(),
+                productionDetailsDTO.imageUrl(),
+                productionDetailsDTO.videoUrl(),
+                productionDetailsDTO.year(),
+                productionDetailsDTO.length(),
+                productionDetailsDTO.rating(),
+                productionDetailsDTO.rentPrice(),
+                productionDetailsDTO.description(),
+                productionDetailsDTO.productionType(),
+                productionDetailsDTO.genre()
+        );
+        model.addAttribute("addProductionDTO", addProductionDTO);
+        return "/production-add";
     }
 
     @DeleteMapping("/{id}")
