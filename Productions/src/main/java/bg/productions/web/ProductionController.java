@@ -69,6 +69,13 @@ public class ProductionController {
                 ).body(productionDTO);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductionDTO> updateProduction(@PathVariable("id") Long id,
+            @RequestBody AddProductionDTO addProductionDTO) {
+        ProductionDTO updatedProduction = productionService.updateProduction(id, addProductionDTO);
+        return ResponseEntity.ok(updatedProduction);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductionDTO> getById(@PathVariable("id") Long id) {
         monitoringService.increaseProductionSearches();
