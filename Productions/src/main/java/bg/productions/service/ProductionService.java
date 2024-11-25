@@ -10,6 +10,8 @@ public interface ProductionService {
 
     ProductionDTO createProduction(AddProductionDTO addProductionDTO);
 
+    ProductionDTO updateProduction(Long id, AddProductionDTO addProductionDTO);
+
     void deleteProduction(Long productionId);
 
     ProductionDTO getProductionById(Long productionId);

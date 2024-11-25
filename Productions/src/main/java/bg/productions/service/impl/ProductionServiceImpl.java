@@ -27,6 +27,30 @@ public class ProductionServiceImpl implements ProductionService {
     }
 
     @Override
+    public ProductionDTO updateProduction(Long id, AddProductionDTO addProductionDTO) {
+        // Fetch the existing production
+        Production existingProduction = productionRepository.findById(id)
+                .orElseThrow(ObjectNotFoundException::new);
+
+        // Update fields
+        existingProduction.setName(addProductionDTO.name());
+        existingProduction.setImageUrl(addProductionDTO.imageUrl());
+        existingProduction.setVideoUrl(addProductionDTO.videoUrl());
+        existingProduction.setYear(addProductionDTO.year());
+        existingProduction.setLength(addProductionDTO.length());
+        existingProduction.setRating(addProductionDTO.rating());
+        existingProduction.setRentPrice(addProductionDTO.rentPrice());
+        existingProduction.setDescription(addProductionDTO.description());
+        existingProduction.setProductionType(addProductionDTO.productionType());
+        existingProduction.setGenre(addProductionDTO.genre());
+
+        // Save updated production
+        productionRepository.save(existingProduction);
+        // Map Production to ProductionDTO
+        return map(existingProduction);
+    }
+
+    @Override
     public ProductionDTO getProductionById(Long productionId) {
         return productionRepository
                 .findById(productionId)
