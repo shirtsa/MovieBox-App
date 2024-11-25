@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductionRepository extends JpaRepository<Production, Long> {
 
+    Production findProductionByExternalId(Long externalId);
 }
