@@ -13,7 +13,5 @@ public interface UserService {
 
     Optional<MovieBoxUserDetails> getCurrentUser();
 
-    void removeFromPlaylist(Long productionId, MovieBoxUserDetails movieBoxUserDetails);
-
     Set<Production> getUserPlaylist(MovieBoxUserDetails movieBoxUserDetails);
 }
