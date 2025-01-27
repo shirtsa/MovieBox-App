@@ -53,6 +53,13 @@ public class ProductionControllerIT {
                 .andExpect(jsonPath("$.productionType").value(equalTo("MOVIE")));
     }
 
+    @Test
+    public void testProductionNotFound() throws Exception {
+        mockMvc.perform(get("/productions/{id}", "9999")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
     private Production createTestProduction() {
        return productionRepository.save(
                 new Production()
