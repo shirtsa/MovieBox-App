@@ -1,0 +1,15 @@
+{
+  "id" : "1",
+  "name" : "Rocky",
+  "imageUrl" : "https://i.pinimg.com/originals/d4/78/da/d478daffcd8186cde17b8e2233679898.jpg",
+  "videoUrl" : "https://www.youtube.com/watch?v=3VUblDwa648",
+  "year" : "1999",
+  "length" : "125",
+  "rating" : "5",
+  "rentPrice" : "4",
+  "description" : "Rocky is a 1976 American sports drama film directed by John G. Avildsen and written by and starring Sylvester Stallone. It is the first installment in the Rocky franchise and also stars Talia Shire, Burt Young, Carl Weathers, and Burgess Meredith. In the film, Rocky Balboa (Stallone), a poor small-time club fighter and loanshark debt collector from Philadelphia, gets an unlikely shot at the world heavyweight championship held by Apollo Creed (Weathers)",
+  "productionType" : "MOVIE",
+  "genre" : "ACTION"
+}
+
+
