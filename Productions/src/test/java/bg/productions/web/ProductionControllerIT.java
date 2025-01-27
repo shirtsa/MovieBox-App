@@ -5,15 +5,18 @@ import bg.productions.model.entities.Production;
 import bg.productions.model.enums.Genre;
 import bg.productions.model.enums.ProductionType;
 import bg.productions.repository.ProductionRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -58,6 +61,19 @@ public class ProductionControllerIT {
         mockMvc.perform(get("/productions/{id}", "9999")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    public void testDeleteProduction() throws Exception {
+        var actualEntity = createTestProduction();
+
+        mockMvc.perform(delete("/productions/{id}", actualEntity.getId())
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isNoContent());
+
+        Assertions.assertTrue(productionRepository.findById(actualEntity.getId()).isEmpty());
     }
 
     private Production createTestProduction() {
