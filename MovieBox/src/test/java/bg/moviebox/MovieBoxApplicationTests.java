@@ -9,5 +9,4 @@ class MovieBoxApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
