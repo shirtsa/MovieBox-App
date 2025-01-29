@@ -3,6 +3,7 @@ package bg.moviebox.service.impl;
 import bg.moviebox.config.ForexApiConfig;
 import bg.moviebox.model.entities.ExchangeRateEntity;
 import bg.moviebox.repository.ExchangeRateRepository;
+import bg.moviebox.service.exception.ApiObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -76,6 +77,13 @@ class ExRateServiceImplTest {
 
     BigDecimal result = toTest.convert(from, to, amount);
     Assertions.assertEquals(expected, result);
+  }
+
+  @Test
+  void testApiObjectNotFoundException() {
+    Assertions.assertThrows(ApiObjectNotFoundException.class,
+            () -> toTest.convert("DOESN'T_EXIST_1", "DOESN'T_EXIST_2", BigDecimal.ONE)
+    );
   }
 
 
