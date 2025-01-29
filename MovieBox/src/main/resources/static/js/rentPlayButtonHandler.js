@@ -51,10 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
             currencySelect.style.display = 'none'; // Hide dropdown in Play state
             isRent = false;
         } else {
-            // const movieId = rentPlayButton.getAttribute('data-movie-id');  // Ensure this attribute is set
-            // window.location.href = `/productions/video/${movieId}`;
-
-            // Redirect to video URL
             window.location.href = rentPlayButton.getAttribute('href');
         }
     });

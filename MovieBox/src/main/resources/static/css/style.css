@@ -604,11 +604,11 @@ button {
 }
 
 .details-delete-btn {
-    width: 110px;
+    width: 130px;
 }
 
 .my-playlist-btn {
-    width: 160px;
+    width: 155px;
 }
 
 .details-rent-btn {
@@ -1189,6 +1189,21 @@ input.email_text::placeholder {
     right: -20px;
     width: 150px;
     top: 50px;
+}
+
+.coming_soon_image {
+    width: 90%;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+}
+
+.coming_soon_image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
 }
 
 .long_text_1 {
