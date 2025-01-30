@@ -1,12 +1,15 @@
 package bg.moviebox.service.impl;
 
 import bg.moviebox.model.dtos.UserRegistrationDTO;
+import bg.moviebox.model.entities.Production;
 import bg.moviebox.model.entities.User;
 import bg.moviebox.model.entities.UserRoleEntity;
 import bg.moviebox.model.enums.UserRoleEnum;
+import bg.moviebox.model.user.MovieBoxUserDetails;
 import bg.moviebox.repository.UserRepository;
 import bg.moviebox.repository.UserRoleRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -109,5 +112,29 @@ public class UserServiceImplTest {
     }
     assertTrue(actualSavedEntity.getRoles().stream()
             .anyMatch(role -> role.getRoles() == UserRoleEnum.USER));
+  }
+
+  @Test
+  void getUserPlaylist_ShouldReturnUserPlaylist() {
+    // Arrange
+    Long userId = 1L;
+    User user = new User().setPlaylist(Set.of(new Production()));
+
+    when(mockUserRepository.findById(userId)).thenReturn(Optional.of(user));
+
+    MovieBoxUserDetails userDetails = new MovieBoxUserDetails(
+            userId,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null);
+
+    // Act
+    Set<Production> result = toTest.getUserPlaylist(userDetails);
+
+    // Assert
+    assertEquals(user.getPlaylist(), result);
   }
 }
