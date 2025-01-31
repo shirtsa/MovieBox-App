@@ -21,4 +21,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
     void deleteOldNews(Instant olderThan);
 
     List<NewsSummaryDTO> findByNewsTypeOrderByIdDesc(NewsType newsType);
+
+    List<NewsSummaryDTO> findByNewsTypeOrderByIdAsc(NewsType newsType);
 }
