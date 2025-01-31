@@ -39,261 +39,90 @@
 <!-- arrival section start -->
 <div class="arrival_section layout_padding">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-lg-4">
-                <div class="image_1">
-                    <h2 class="jesusroch_text">J E S U S R O C H</h2>
-                    <p class="movie_text">Hollywood Movie</p>
+        <form th:each="news : ${newRelease}"
+              th:object="${news}">
+            <div class="row">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="image_1" th:style="'background-image: url(' + ${news.firstImageUrl()} + ');'">
+                        <h2 class="jesusroch_text">N E W R E L E A S E</h2>
+                        <p class="movie_text">Hollywood Movie</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="image_2">
-                    <h2 class="jesusroch_text">J E S U S R O C H</h2>
-                    <p class="movie_text">Hollywood Movie</p>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="image_2" th:style="'background-image: url(' + ${news.secondImageUrl()} + ');'">
+                        <h2 class="jesusroch_text">N E W R E L E A S E</h2>
+                        <p class="movie_text">Hollywood Movie</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-8 col-lg-4">
-                <h1 class="arrival_text">A r r i v a l</h1>
-                <div class="movie_main">
-                    <div class="mins_text_1">150 mins</div>
-                    <div class="mins_text">Actions Movie</div>
-                    <div class="mins_text"><img src="images/icon-1.png"><span class="icon_1">Watchlist</span></div>
-                </div>
-                <p class="long_text">It is a long-established fact that a reader will be distracted by the readable
-                    content of a page when looking at its layout. The point of using Lorem</p>
-                <div class="rating_main">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-6">
-                            <div class="icon_2"><img src="images/icon-2.png"><span
-                                    class="padding_10">4.6 Reviewed</span></div>
-                        </div>
-                        <div class="col-sm-6 col-lg-6">
-                            <div class="icon_2"><img src="images/icon-2.png"><span class="padding_10">Your Rating</span>
+                <div class="col-sm-8 col-lg-4">
+                    <h1 class="arrival_text" th:text="#{release_btn}">R e l e a s e</h1>
+                    <div class="movie_main">
+                        <div class="mins_text_1">150 mins</div>
+                        <div class="mins_text">Actions Movie</div>
+                        <div class="mins_text"><img src="images/icon-1.png"><span class="icon_1">Watchlist</span></div>
+                    </div>
+                    <p class="long_text" th:text="${#strings.abbreviate(news.description(), 150)}">Text</p>
+                    <div class="rating_main">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="icon_2"><img src="images/icon-2.png">
+                                    <span class="padding_10">4.6 Reviewed</span></div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="icon_2"><img src="images/icon-2.png">
+                                    <span class="padding_10">Your Rating</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="play_bt"><a
+                            th:href="|https://www.youtube.com/embed/*{trailerUrl()}|"
+                            th:text="#{trailer_play_btn}">See Trailer</a>
+                    </div>
                 </div>
-                <div class="play_bt"><a href="#">Play Now</a></div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <!-- arrival section end -->
 <!-- movies section start -->
 <div class="movies_section layout_padding">
     <div class="container">
-        <div class="movies_menu"
-             th:replace="~{fragments/overview}">
-        </div>
-        <!--        <div class="moviesList" th:replace="~{movies :: movieList}"></div>-->
-        <!--        <div class="movies_section_2 layout_padding">-->
-        <!--            <h2 class="latest_text">Latest Movies</h2>-->
-        <!--            <div class="seemore_bt"><a href="/productions/movies">See More</a></div>-->
-        <!--            <div class="movies_main">-->
-        <!--                <div class="image_movies_main">-->
-        <!--                    <div class="image_movies">-->
-        <!--                        <div class="image_3">-->
-        <!--                            <img src="images/img-3.png" class="image" style="width:100%">-->
-        <!--                            <div class="middle">-->
-        <!--                                <div class="playnow_bt">Play Now</div>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                        <h1 class="code_text">CADE Prlor</h1>-->
-        <!--                        <p class="there_text">There are many variations </p>-->
-        <!--                        <div class="star_icon">-->
-        <!--                            <ul>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                            </ul>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="image_movies">-->
-        <!--                        <div class="image_3">-->
-        <!--                            <img src="images/img-4.png" class="image" style="width:100%">-->
-        <!--                            <div class="middle">-->
-        <!--                                <div class="playnow_bt">Play Now</div>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                        <h1 class="code_text">Bradon</h1>-->
-        <!--                        <p class="there_text">There are many variations </p>-->
-        <!--                        <div class="star_icon">-->
-        <!--                            <ul>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                            </ul>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="image_movies">-->
-        <!--                        <div class="image_3">-->
-        <!--                            <img src="images/img-5.png" class="image" style="width:100%">-->
-        <!--                            <div class="middle">-->
-        <!--                                <div class="playnow_bt">Play Now</div>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                        <h1 class="code_text">Anton Levin</h1>-->
-        <!--                        <p class="there_text">There are many variations </p>-->
-        <!--                        <div class="star_icon">-->
-        <!--                            <ul>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                            </ul>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="image_movies">-->
-        <!--                        <div class="image_3">-->
-        <!--                            <img src="images/img-6.png" class="image" style="width:100%">-->
-        <!--                            <div class="middle">-->
-        <!--                                <div class="playnow_bt">Play Now</div>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                        <h1 class="code_text">Sacha Styles</h1>-->
-        <!--                        <p class="there_text">There are many variations </p>-->
-        <!--                        <div class="star_icon">-->
-        <!--                            <ul>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                            </ul>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="image_movies">-->
-        <!--                        <div class="image_3">-->
-        <!--                            <img src="images/img-7.png" class="image" style="width:100%">-->
-        <!--                            <div class="middle">-->
-        <!--                                <div class="playnow_bt">Play Now</div>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                        <h1 class="code_text">Katledrazdu</h1>-->
-        <!--                        <p class="there_text">There are many variations </p>-->
-        <!--                        <div class="star_icon">-->
-        <!--                            <ul>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                                <li><a href="#"><img src="images/star-icon.png"></a></li>-->
-        <!--                            </ul>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+        <div class="movies_menu" th:replace="~{fragments/overview}"></div>
         <div class="movies_section_2 layout_padding">
-            <h2 class="latest_text">TV Shows</h2>
-            <div class="seemore_bt"><a href="/productions/tv">See More</a></div>
+            <h2 class="latest_text" th:text="#{nav_bar_all_productions}">Productions</h2>
+            <div class="seemore_bt"><a href="/productions/tv" th:text="#{movie_box_see_more_btn}">See More</a></div>
             <div class="movies_main">
                 <div class="image_movies_main">
-                    <div class="image_movies">
-                        <div class="image_3">
-                            <img src="images/img-8.png" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="playnow_bt">Play Now</div>
+                    <form th:each="production : ${allProductions}"
+                          th:object="${production}">
+                        <div class="image_movies">
+                            <div class="image_3">
+                                <img th:src="*{imageUrl}" class="image" style="width:100%" alt="Production image">
+                                <div class="middle">
+                                    <div class="playnow_bt">
+                                        <a th:href="|https://www.youtube.com/embed/*{videoUrl}|"
+                                           th:text="#{trailer_play_btn}">Trailer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1 class="code_text" th:text="*{name}">Production Name</h1>
+                            <p class="there_text" th:text="*{genre}">Information</p>
+                            <div class="star_icon">
+                                <ul>
+                                    <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                    <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                    <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                    <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                    <li><a href="#"><img src="images/star-icon.png"></a></li>
+                                </ul>
                             </div>
                         </div>
-                        <h1 class="code_text">CADE Prlor</h1>
-                        <p class="there_text">There are many variations </p>
-                        <div class="star_icon">
-                            <ul>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="image_movies">
-                        <div class="image_3">
-                            <img src="images/img-9.png" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="playnow_bt">Play Now</div>
-                            </div>
-                        </div>
-                        <h1 class="code_text">Bradon</h1>
-                        <p class="there_text">There are many variations </p>
-                        <div class="star_icon">
-                            <ul>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="image_movies">
-                        <div class="image_3">
-                            <img src="images/img-10.png" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="playnow_bt">Play Now</div>
-                            </div>
-                        </div>
-                        <h1 class="code_text">Anton Levin</h1>
-                        <p class="there_text">There are many variations </p>
-                        <div class="star_icon">
-                            <ul>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="image_movies">
-                        <div class="image_3">
-                            <img src="images/img-11.png" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="playnow_bt">Play Now</div>
-                            </div>
-                        </div>
-                        <h1 class="code_text">Sacha Styles</h1>
-                        <p class="there_text">There are many variations </p>
-                        <div class="star_icon">
-                            <ul>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="image_movies">
-                        <div class="image_3">
-                            <img src="images/img-12.png" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="playnow_bt">Play Now</div>
-                            </div>
-                        </div>
-                        <h1 class="code_text">Katledrazdu</h1>
-                        <p class="there_text">There are many variations </p>
-                        <div class="star_icon">
-                            <ul>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                                <li><a href="#"><img src="images/star-icon.png"></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="movies_section_2 layout_padding">
-        </div>
+        <div class="movies_section_2 layout_padding"></div>
     </div>
 </div>
 <!-- movies section end -->
@@ -305,15 +134,17 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="coming_soon_image">
-<!--                        <img src="/images/img-17.png" alt="News image">-->
                         <img th:src="*{firstImageUrl()}" alt="News image">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <h1 class="number_text">01</h1>
-                    <h1 class="Coming_soon_title">Coming soon</h1>
+                    <h1 class="Coming_soon_title" th:text="#{coming_soon_btn}">Coming soon</h1>
                     <p class="long_text_1" th:text="${#strings.abbreviate(news.description(), 150)}">Text</p>
-                    <div class="play_bt"><a th:href="|https://www.youtube.com/embed/*{trailerUrl()}|">See Trailer</a></div>
+                    <div class="play_bt">
+                        <a th:href="|https://www.youtube.com/embed/*{trailerUrl()}|"
+                           th:text="#{trailer_play_btn}">See Trailer</a>
+                    </div>
                 </div>
             </div>
         </form>
