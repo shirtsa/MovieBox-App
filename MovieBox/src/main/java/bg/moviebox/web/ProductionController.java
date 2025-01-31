@@ -8,6 +8,8 @@ import bg.moviebox.model.user.MovieBoxUserDetails;
 import bg.moviebox.service.ProductionService;
 import jakarta.validation.Valid;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -110,22 +112,29 @@ public class ProductionController {
 
     @GetMapping("/all")
     public String getAllProductions(Model model) {
-        model.addAttribute("allProductions",
-                productionService.getAllProductionsSummary());
+        model.addAttribute("allProductions", productionService.getAllProductionsSummary());
         return "productions";
     }
 
     @GetMapping("/movies")
-    public String movies(Model model) {
-        model.addAttribute("allMovieProductions",
-                productionService.getAllMovieProductions());
+    public String movies(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+
+        if (!(userDetails instanceof MovieBoxUserDetails)) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("allMovieProductions", productionService.getAllMovieProductions());
         return "/movies";
     }
 
     @GetMapping("/tv")
-    public String tv(Model model) {
-        model.addAttribute("allTvProductions",
-                productionService.getAllTvProductions());
+    public String tv(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+
+        if (!(userDetails instanceof MovieBoxUserDetails)) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("allTvProductions", productionService.getAllTvProductions());
         return "/tv";
     }
 }
