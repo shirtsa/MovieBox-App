@@ -91,7 +91,17 @@ public class NewsServiceImpl implements NewsService {
     public List<NewsSummaryDTO> getNewsWithNewsTypeComingSoon() {
         return newsRepository
                 .findByNewsTypeOrderByIdDesc(NewsType.COMING_SOON)
-                .stream().limit(1)
+                .stream()
+                .limit(1)
+                .toList();
+    }
+
+    @Override
+    public List<NewsSummaryDTO> getNewsWithNewsTypeNewRelease() {
+        return newsRepository
+                .findByNewsTypeOrderByIdAsc(NewsType.NEW_RELEASE)
+                .stream()
+                .limit(1)
                 .toList();
     }
 

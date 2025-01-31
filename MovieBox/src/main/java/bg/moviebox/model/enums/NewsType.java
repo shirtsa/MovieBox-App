@@ -1,5 +1,5 @@
 package bg.moviebox.model.enums;
 
 public enum NewsType {
-    COMING_SOON, NEW_ARRIVAL
+    COMING_SOON, NEW_RELEASE
 }

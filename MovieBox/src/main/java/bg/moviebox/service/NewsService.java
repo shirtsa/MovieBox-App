@@ -20,4 +20,5 @@ public interface NewsService {
 
     List<NewsSummaryDTO> getNewsWithNewsTypeComingSoon();
 
+    List<NewsSummaryDTO> getNewsWithNewsTypeNewRelease();
 }
