@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head}"><title>Production Details</title></head>
 <body>
 <div class="header_section"
@@ -37,13 +37,13 @@
                         <input class="btn btn-link" type="submit" value="My Playlist">
                     </form>
             </div>
-            <div class="details-update-btn btn-common">
+            <div class="details-update-btn btn-common" sec:authorize="hasRole('ADMIN')">
                 <img src="/images/update-btn.png" alt="Update icon">
                 <form th:method="get" th:action="@{/productions/edit/{id}(id=*{id})}">
                     <input class="btn btn-link" type="submit" value="Update">
                 </form>
             </div>
-            <div class="details-delete-btn btn-common">
+            <div class="details-delete-btn btn-common" sec:authorize="hasRole('ADMIN')">
                 <img src="/images/delete-btn.png" alt="Delete icon">
                 <form th:method="delete" th:action="@{/productions/{id}(id=*{id})}">
                     <input class="btn btn-link" type="submit" value="Delete">

@@ -8,7 +8,7 @@
 <div class="movies_section layout_padding">
     <div class="container">
         <div class="movies_menu" th:replace="~{fragments/overview}"></div>
-        <div class="movies_section_2 layout_padding">
+        <div class="movies_section_2 layout_padding" th:fragment="movieList">
             <h2 class="latest_text" th:text="#{movies_latest_text}">Latest Movies</h2>
             <div class="production_main">
                 <div class="image_movies_main"

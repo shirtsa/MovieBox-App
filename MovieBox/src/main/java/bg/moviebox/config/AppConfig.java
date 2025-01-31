@@ -16,8 +16,8 @@ public class AppConfig {
   //Populate the Database
   @Bean
   public DataSourceInitializer dataSourceInitializer(DataSource dataSource,
-      UserRoleRepository userRoleRepository,
-      ResourceLoader resourceLoader) {
+                                                     UserRoleRepository userRoleRepository,
+                                                     ResourceLoader resourceLoader) {
     DataSourceInitializer initializer = new DataSourceInitializer();
     initializer.setDataSource(dataSource);
 
@@ -26,7 +26,6 @@ public class AppConfig {
       populate.addScript(resourceLoader.getResource("classpath:data.sql"));
       initializer.setDatabasePopulator(populate);
     }
-
     return initializer;
   }
 
@@ -34,5 +33,4 @@ public class AppConfig {
   public RestTemplate restTemplate() {
     return new RestTemplate();
   }
-
 }

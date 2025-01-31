@@ -20,14 +20,11 @@ public class MovieBoxUserDetailsService implements UserDetailsService {
   }
 
   @Override
-  public UserDetails loadUserByUsername(String email)
-      throws UsernameNotFoundException {
-
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
     return userRepository
         .findByEmail(email)
         .map(MovieBoxUserDetailsService::map)
-        .orElseThrow(
-            () -> new UsernameNotFoundException("User with email " + email + " not found!"));
+        .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found!"));
   }
 
   private static UserDetails map(User user) {

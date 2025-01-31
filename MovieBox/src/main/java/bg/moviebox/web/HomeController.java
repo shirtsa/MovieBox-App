@@ -17,7 +17,9 @@ public class HomeController {
     private final NewsService newsService;
     private final CelebrityService celebrityService;
 
-    public HomeController(ProductionService productionService, NewsService newsService, CelebrityService celebrityService) {
+    public HomeController(ProductionService productionService,
+                          NewsService newsService,
+                          CelebrityService celebrityService) {
         this.productionService = productionService;
         this.newsService = newsService;
         this.celebrityService = celebrityService;
@@ -30,19 +32,16 @@ public class HomeController {
         } else {
             model.addAttribute("welcomeMessage", "Anonymous");
         }
-
         model.addAttribute("comingSoon", newsService.getNewsWithNewsTypeComingSoon());
         return "index";
     }
 
     @GetMapping("/overview")
     public String getMovies(Model model) {
-
         model.addAttribute("allMovieProductions", productionService.getAllMovieProductions());
         model.addAttribute("allTvProductions", productionService.getAllTvProductions());
         model.addAttribute("allNews", newsService.getAllNewsSummary());
         model.addAttribute("allCelebrities", celebrityService.getAllCelebritySummary());
-
         return "overview";
     }
 }
